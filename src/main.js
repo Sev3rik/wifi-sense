@@ -4,6 +4,20 @@ const HISTORY = 240;        // ~2 minutos en el gráfico
 const data = [];
 let threshold = Number(localStorage.th || 2);
 let calibrating = null;
+let soundOn = localStorage.sound !== 'off', wasMoving = false, lastBeep = 0, actx;
+const paintSound = () => ($('sound').textContent = soundOn ? '🔔 Sonido: activado' : '🔕 Sonido: apagado');
+paintSound();
+$('sound').onclick = () => { soundOn = !soundOn; localStorage.sound = soundOn ? 'on' : 'off'; paintSound(); actx ??= new AudioContext(); };
+function beep() {
+  if (!soundOn || Date.now() - lastBeep < 3000) return;
+  lastBeep = Date.now(); actx ??= new AudioContext();
+  [0, 0.18].forEach((d, i) => {
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = 'sine'; o.frequency.value = i ? 1320 : 880;
+    g.gain.setValueAtTime(0.25, actx.currentTime + d); g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + d + 0.15);
+    o.connect(g).connect(actx.destination); o.start(actx.currentTime + d); o.stop(actx.currentTime + d + 0.16);
+  });
+}
 
 $('th').value = threshold; $('thVal').textContent = threshold.toFixed(1);
 $('th').oninput = (e) => { threshold = Number(e.target.value); localStorage.th = threshold; $('thVal').textContent = threshold.toFixed(1); };
@@ -48,6 +62,8 @@ function connect() {
     $('state').textContent = moving ? '🚶 Movimiento' : '🧘 Quieto';
     $('dist').textContent = distance(s.rssi);
     $('stateCard').className = 'card ' + (moving ? 'moving' : 'still');
+    if (moving && !wasMoving) beep();
+    wasMoving = moving;
     draw(moving);
   };
   ws.onclose = () => { $('net').textContent = 'Reconectando con el servidor…'; setTimeout(connect, 1500); };

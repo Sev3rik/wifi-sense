@@ -18,6 +18,7 @@
 - 📈 Gráfico en vivo de la intensidad de la señal (RSSI, en dBm) entre tu PC y el router.
 - 🚶 Indicador de **movimiento / quieto** según cuánto fluctúa la señal.
 - 📍 Estimación aproximada de **qué tan cerca** está tu PC del router.
+- 🔔 **Alerta sonora** al empezar el movimiento (se puede silenciar).
 - 🎚️ Umbral ajustable y botón de **calibración** con la habitación vacía.
 
 ## 🚀 Uso rápido
@@ -49,6 +50,14 @@ Cuando una persona se mueve entre el router y el PC, su cuerpo absorbe y refleja
 1. Pon el PC a 2–5 m del router, con el espacio a vigilar **entre ambos**.
 2. Pulsa **Calibrar** con la habitación vacía y quieta.
 3. La banda de 5 GHz suele reaccionar más al movimiento que la de 2,4 GHz.
+
+## 📐 ¿Distinguir a una persona por su altura?
+
+Con un solo enlace RSSI no se puede medir la altura, porque la señal no trae ángulo ni distancia al objeto. Lo que sí sirve es la geometría de la **zona de Fresnel**: la señal viaja por un "huso" alrededor de la línea router–PC, de radio
+
+$$ r = \sqrt{\frac{\lambda \, d_1 d_2}{d_1 + d_2}} $$
+
+A 5 GHz (λ ≈ 6 cm) y con 4 m entre equipos, el radio en el centro es de unos **24 cm**. Si pones el router y el PC a **~1,4 m de altura**, el huso queda entre ~1,15 y 1,65 m: lo cruza el torso de un adulto (como alguien de 1,83 m), pero no una mascota ni una silla. Es un filtro físico, no una identificación.
 
 ## ⚠️ Límites (léelo)
 
