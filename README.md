@@ -85,4 +85,3 @@ wifi-sense/
 └── vite.config.js
 ```
 
-<div align="center">Hecho con 💜 para Søren</div>
