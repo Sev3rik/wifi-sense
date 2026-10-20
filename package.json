@@ -1,0 +1,14 @@
+{
+  "name": "wifi-sense",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Detección de presencia y movimiento con la señal WiFi (RSSI) en Windows",
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"node server/index.js\" \"vite\"",
+    "demo": "concurrently -n api,web -c cyan,magenta \"node server/index.js --demo\" \"vite\"",
+    "build": "vite build"
+  },
+  "dependencies": { "ws": "^8.18.0" },
+  "devDependencies": { "concurrently": "^9.0.1", "vite": "^5.4.10" }
+}

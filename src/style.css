@@ -1,0 +1,20 @@
+:root { --bg:#0b1020; --card:#151c33; --fg:#e6ebff; --muted:#8a94b8; --ok:#22c55e; --warn:#f59e0b; --accent:#7c5cff; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: system-ui, Segoe UI, sans-serif; background: radial-gradient(circle at top, #1a2250, var(--bg)); color: var(--fg); min-height:100vh; }
+header { text-align:center; padding:2rem 1rem 1rem; }
+h1 { margin:0; font-size:2.4rem; background: linear-gradient(90deg,#7c5cff,#22d3ee); -webkit-background-clip:text; color:transparent; }
+#net { color: var(--muted); }
+main { max-width: 900px; margin: 0 auto; padding: 1rem; }
+.cards { display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; }
+.card { background: var(--card); border-radius: 16px; padding: 1.2rem; text-align:center; display:flex; flex-direction:column; gap:.3rem; border:1px solid #232c4d; transition: .3s; }
+.card span { color: var(--muted); font-size:.85rem; text-transform: uppercase; letter-spacing:.08em; }
+.card b { font-size: 2rem; }
+.card small { color: var(--muted); }
+.card.moving { border-color: var(--warn); box-shadow: 0 0 24px #f59e0b55; }
+.card.still { border-color: var(--ok); }
+canvas { width:100%; background: var(--card); border-radius:16px; margin-top:1rem; border:1px solid #232c4d; }
+.controls { display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-top:1rem; }
+input[type=range] { width: 260px; accent-color: var(--accent); }
+button { background: var(--accent); color:white; border:0; padding:.7rem 1.1rem; border-radius:10px; cursor:pointer; font-weight:600; }
+button:disabled { opacity:.5; }
+.note { color: var(--muted); text-align:center; font-size:.9rem; }
